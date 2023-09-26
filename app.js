@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-  User.findById('65130f3c610fd276f87bad02')
+  User.findById('5bab316ce0a7c75f783cb8a8')
     .then(user => {
       req.user = user;
       next();
@@ -34,14 +34,14 @@ app.use(errorController.get404);
 
 mongoose
   .connect(
-    'mongodb+srv://williamvisentini:LdJV3rzcE6MGrVvf@cluster0.rkbluat.mongodb.net/?retryWrites=true&w=majority'
+    'mongodb+srv://maximilian:9u4biljMQc4jjqbe@cluster0-ntrwp.mongodb.net/shop?retryWrites=true'
   )
   .then(result => {
     User.findOne().then(user => {
       if (!user) {
         const user = new User({
-          name: 'William Visentini',
-          email: 'williamvisentini@email.com.br',
+          name: 'Max',
+          email: 'max@test.com',
           cart: {
             items: []
           }
