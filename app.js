@@ -10,7 +10,7 @@ const errorController = require('./controllers/error');
 const User = require('./models/user');
 
 const MONGODB_URI =
-'mongodb+srv://williamvisentini:LdJV3rzcE6MGrVvf@cluster0.rkbluat.mongodb.net/test';
+  'mongodb+srv://williamvisentini:Pbv0B6RvFR5pZs72@cluster0.rkbluat.mongodb.net/?retryWrites=true&w=majority';
 
 const app = express();
 const store = new MongoDBStore({
@@ -37,7 +37,10 @@ app.use(
 );
 
 app.use((req, res, next) => {
-  User.findById('65130f3c610fd276f87bad02')
+  if (!req.session.user) {
+    return next();
+  }
+  User.findById(req.session.user._id)
     .then(user => {
       req.user = user;
       next();
@@ -52,9 +55,7 @@ app.use(authRoutes);
 app.use(errorController.get404);
 
 mongoose
-  .connect(
-    MONGODB_URI
-  )
+  .connect(MONGODB_URI)
   .then(result => {
     User.findOne().then(user => {
       if (!user) {
