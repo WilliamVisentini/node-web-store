@@ -1,4 +1,5 @@
 const path = require('path');
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -7,18 +8,19 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const flash = require('connect-flash');
 
+require('dotenv').config();
+const MONGODB_URI = process.env.dbConn;
+
 const errorController = require('./controllers/error');
 const User = require('./models/user');
 
-const MONGODB_URI = 'mongodb+srv://williamvisentini:Pbv0B6RvFR5pZs72@cluster0.rkbluat.mongodb.net/?retryWrites=true&w=majority';
+
 
 const app = express();
-
 const store = new MongoDBStore({
   uri: MONGODB_URI,
   collection: 'sessions'
 });
-
 const csrfProtection = csrf();
 
 app.set('view engine', 'ejs');
@@ -30,7 +32,6 @@ const authRoutes = require('./routes/auth');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(
   session({
     secret: 'my secret',
