@@ -1,4 +1,5 @@
 const path = require('path');
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -23,19 +24,18 @@ const csrfProtection = csrf();
 
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'images/uploads');
+    cb(null, 'images');
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname);
-  },
+    cb(null, new Date().toISOString() + '-' + file.originalname);
+  }
 });
 
 const fileFilter = (req, file, cb) => {
   if (
     file.mimetype === 'image/png' ||
     file.mimetype === 'image/jpg' ||
-    file.mimetype === 'image/jpeg' ||
-    file.mimetype === 'image/webp'
+    file.mimetype === 'image/jpeg'
   ) {
     cb(null, true);
   } else {
@@ -100,11 +100,12 @@ app.get('/500', errorController.get500);
 app.use(errorController.get404);
 
 app.use((error, req, res, next) => {
-  console.log(error.message);
+  // res.status(error.httpStatusCode).render(...);
+  // res.redirect('/500');
   res.status(500).render('500', {
-      pageTitle: 'Error!',
-      path: '/500',
-      isAuthenticated: !!req.session?.isLoggedIn,
+    pageTitle: 'Error!',
+    path: '/500',
+    isAuthenticated: req.session.isLoggedIn
   });
 });
 
