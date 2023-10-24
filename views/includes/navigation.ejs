@@ -2,9 +2,6 @@
 <header class="main-header">
     <button id="side-menu-toggle">Menu</button>
     <nav class="main-header__nav">
-        <div>
-            <object data="/images/block-11-w.png" width="30" height="30"> </object>
-        </div>
         <ul class="main-header__item-list">
             <li class="main-header__item">
                 <a class="<%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
@@ -24,7 +21,7 @@
                     </a>
                 </li>
                 <li class="main-header__item">
-                    <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products
+                    <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Manage Products
                     </a>
                 </li>
             <% } %>
@@ -69,7 +66,7 @@
                 </a>
             </li>
             <li class="mobile-nav__item">
-                <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products
+                <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Manage Products
                 </a>
             </li>
         <% } %>
