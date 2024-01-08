@@ -43,7 +43,7 @@ Várias funções de middleware foram utilizadas na aplicação, incluindo:
 A aplicação inclui tratamento de erros básico, caso ocorra um erro inesperado, ele será registrado no console e o usuário verá uma página de erro.
 
 ## 7. Banco de Dados
-A aplicação se conecta a um banco de dados MongoDB usando o Mongoose. A URI de conexão está armazenada no arquivo .env como MONGODB_URI.
+A aplicação se conecta a um banco de dados MongoDB usando o Mongoose. A URI de conexão está armazenada no arquivo .env (que deve ser criado) como URI/MONGODB_URI.
 
 ## 8. Executando a Aplicação
 Para iniciar a aplicação, utilize o seguinte comando:
